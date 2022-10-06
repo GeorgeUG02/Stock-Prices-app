@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/loc">
+
+            <View
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@color/red" />
+
+            <TextView
+                android:id="@+id/company_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/av_api"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="alphavantage.co" />
+
+            <RadioButton
+                android:id="@+id/test_api"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="test API" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/ts"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:entries="@array/time_series" />
+
+            <EditText
+                android:id="@+id/minutes"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/minutes"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/numPoints"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/numpoints"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/build_chart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/build_chart" />
+
+        <Button
+            android:id="@+id/build_chart_db"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/build_a_chart_from_local_data" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/scrl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/left"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="200dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/scrr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/right"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChart"
+            android:layout_width="400dp"
+            android:layout_height="400dp" />
+
+        <HorizontalScrollView
+            android:id="@+id/hsv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/tl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </HorizontalScrollView>
+
+        <Button
+            android:id="@+id/save_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save_data" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

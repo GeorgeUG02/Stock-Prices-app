@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Stock Prices</string>
+    <string name="left">back</string>
+    <string name="right">forward</string>
+    <string name="build_chart">Build a chart</string>
+    <string name="json">{
+  "03.08.2022": {
+    "myopen": 100.0,
+    "myclose": 105.0
+  },
+  "02.08.2022": {
+    "myopen": 103.0,
+    "myclose": 102.0
+  },
+  "01.08.2022": {
+    "myopen": 107.0,
+    "myclose": 110.0
+  }
+}</string>
+    <string name="se_ticker2">SE ticker2</string>
+    <string name="se_ticker3">SE ticker3</string>
+    <string name="save_data">Save data</string>
+    <string name="build_a_chart_from_local_data">Build a chart from a local data</string>
+    <string name="minutes">minutes</string>
+    <string name="numpoints">numPoints</string>
+    <string name="choose_companies">Choose companies</string>
+    <string name="api_key">API key</string>
+    <string name="add_remove_companies">add/remove companies</string>
+    <string name="enter_your_api_key">Enter your API key</string>
+    <string name="enter_company_name">Enter company name</string>
+    <string name="enter_company_ticker">Enter company ticker</string>
+    <string name="add_company">Add company</string>
+    <string name="remove_company">Remove company</string>
+    <string name="change_api_key">Change API key</string>
+    <string-array name="time_series">
+        <item>minutes</item>
+        <item>daily</item>
+    </string-array>
+</resources>
