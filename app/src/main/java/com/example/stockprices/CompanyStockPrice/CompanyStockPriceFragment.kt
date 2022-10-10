@@ -74,6 +74,7 @@ class CompanyStockPriceFragment : Fragment() {
             if (interval.second!=null) {
                 outState.putInt("interval_2", interval.second!!)
             }
+                outState.putString("repository",repository)
 
         }
     }
@@ -304,12 +305,10 @@ class CompanyStockPriceFragment : Fragment() {
             }
             else{
                 var ak:String?
-                var av = savedInstanceState.getBoolean("av",true)
-                if (av) {
-                    repository = REPOSITORYAV
+                repository = savedInstanceState.getString("repository","")
+                if (repository == REPOSITORYAV) {
                     ak = requireActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE).getString(APIKEY,"")
                 } else {
-                    repository = REPOSITORYTEST
                     ak=""
                 }
                 interval = Pair(savedInstanceState.getString("interval_1","min"),savedInstanceState.getInt("interval_2",5))
