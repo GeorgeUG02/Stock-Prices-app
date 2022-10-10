@@ -41,6 +41,7 @@ class CompanyStockPriceFragment : Fragment() {
     private var ljo: ArrayList<JSONObject> = arrayListOf()
     private var keys: ArrayList<MutableIterator<String>> = arrayListOf()
     private var binding: FragmentCompanyStockPriceBinding? = null
+    private var is_local = false
     private var is_built = false
     private var isBlocked = false
     private var maxReached = false
@@ -62,10 +63,19 @@ class CompanyStockPriceFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-            for (i in ljo.indices) {
+            for (i in lcn.indices) {
                 outState.putString("cn_$i", lcn[i].first)
                 outState.putString("ct_$i", lcn[i].second)
             }
+        outState.putBoolean("is_built",is_built)
+        if (is_built){
+            outState.putBoolean("is_local",is_local)
+            outState.putString("interval_1",interval.first)
+            if (interval.second!=null) {
+                outState.putInt("interval_2", interval.second!!)
+            }
+
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -259,6 +269,7 @@ class CompanyStockPriceFragment : Fragment() {
                     }
                 }
                 isBlocked = false
+                is_local=true
             }
         }
     }
@@ -284,6 +295,34 @@ class CompanyStockPriceFragment : Fragment() {
                 savedInstanceState.getString("ct_0", "")
             )
         )
+        var is_built = savedInstanceState.getBoolean("is_built",false)
+        if (is_built){
+            is_local = savedInstanceState.getBoolean("is_local",false)
+            var cs = CoroutineScope(SupervisorJob())
+            if (is_local){
+                buildFromDB(cs)
+            }
+            else{
+                var ak:String?
+                var av = savedInstanceState.getBoolean("av",true)
+                if (av) {
+                    repository = REPOSITORYAV
+                    ak = requireActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE).getString(APIKEY,"")
+                } else {
+                    repository = REPOSITORYTEST
+                    ak=""
+                }
+                interval = Pair(savedInstanceState.getString("interval_1","min"),savedInstanceState.getInt("interval_2",5))
+                cs.launch {
+                    model.loadData(
+                        ak!!,
+                        lcn,
+                        scope.get(qualifier = named(repository)),
+                        interval
+                    )
+                }
+            }
+        }
     }
 
     private fun getData(cs: CoroutineScope, scope: Scope) {
@@ -404,6 +443,7 @@ class CompanyStockPriceFragment : Fragment() {
             }
         }
         isBlocked = false
+        is_local = false
     }
 
     private fun processDataTEST(it: ArrayList<JSONObject>) {
